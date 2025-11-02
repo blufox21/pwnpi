@@ -1,9 +1,9 @@
-from driver.py import ST7789
+from driver import ST7789
 import time
 
 def main():
     try:
-        display = ST7789()
+        display = ST7789(w=320, h=170)
         colors = [0xf800, 0xfce0, 0xffe0, 0x07e0, 0x023f, 0x001f, 0xf81f]
         i = 0
         while(i<7):
