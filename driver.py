@@ -7,7 +7,7 @@ DC_PIN = 24
 BLK_PIN = 27
 
 class ST7789:
-    def __init__(self, w=240, h=240, res=25, dc=24, blk=27):
+    def __init__(self, w=240, h=240, res=25, dc=24, blk=27, x_off=0, y_off=0):
         self.WIDTH = w
         self.HEIGHT = h
         
@@ -15,6 +15,9 @@ class ST7789:
         self.DC_PIN = dc
         self.BLK_PIN = blk
         
+        self.x_off = x_off
+        self.y_off = y_off
+
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.RES_PIN, GPIO.OUT)
         GPIO.setup(self.DC_PIN, GPIO.OUT)
@@ -78,6 +81,12 @@ class ST7789:
 
     def set_window(self, x0, y0, x1, y1):
         self.write_command(0x2A)
+
+        x0 += self.x_off
+        x1 += self.x_off
+        y0 += self.y_off
+        y1 += self.y_off
+
         self.write_data([x0 >> 8, x0 & 0xFF, x1 >> 8, x1 & 0xFF])
 
         self.write_command(0x2B)
