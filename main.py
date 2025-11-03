@@ -8,8 +8,8 @@ def main():
         gui = Gui(display)
     except KeyboardInterrupt:
         print('\n')
-    except:
-        print('err')
+    except Exception as err:
+        print(err)
     finally:
         print('cleanup')
         display.cleanup()
