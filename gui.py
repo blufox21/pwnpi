@@ -15,5 +15,5 @@ class Gui:
         self.draw = ImageDraw.Draw(self.img)
 
         # header bg
-        self.draw.rectangle([0, 0, self.display.WIDTH, self.HEAD_HEIGHT], fill=self.HEAD_COLOR, outline=HEAD_OUTLINE)
+        self.draw.rectangle([0, 0, self.display.WIDTH, self.HEAD_HEIGHT], fill=self.HEAD_COLOR, outline=self.HEAD_OUTLINE)
         self.img.show()
