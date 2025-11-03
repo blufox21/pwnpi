@@ -94,6 +94,12 @@ class ST7789:
 
         # write memory
         self.write_command(0x2C)
+    
+    def display(self, pixel_data, chunk_size=4096):
+        for i in range(0, len(pixel_data), chunk_size):
+            chunk = pixel_data[i:i + chunk_size]
+            self.spi.writebytes(chunk)
+
 
     def fill(self, color):
         self.set_window(0,0, self.WIDTH-1, self.HEIGHT-1)
@@ -103,13 +109,8 @@ class ST7789:
 
         GPIO.output(self.DC_PIN, GPIO.HIGH)
         pixel_data = [color_high, color_low] * (self.WIDTH * self.HEIGHT)
-
-        chunk_size = 4096
-        for i in range(0, len(pixel_data), chunk_size):
-            chunk = pixel_data[i:i + chunk_size]
-            self.spi.writebytes(chunk)
-
-        #print(pixel_data)
+        
+        self.display(pixel_data)
 
     def cleanup(self):
         GPIO.output(self.BLK_PIN, GPIO.LOW)
