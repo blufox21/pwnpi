@@ -1,4 +1,5 @@
 from driver import ST7789
+from gui import Gui
 import time
 
 def main():
