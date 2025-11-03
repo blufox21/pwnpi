@@ -18,7 +18,7 @@ class Gui:
         # header bg
         self.draw.rectangle([0, 0, self.display.WIDTH, self.HEAD_HEIGHT], fill=self.HEAD_COLOR, outline=self.HEAD_OUTLINE)
 
-    def get():
+    def get(self):
         img = np.array(self.img.convert('RGB'))
         pb = np.rot90(img, self.display.ROTATION // 90).astype("uint16")
 
