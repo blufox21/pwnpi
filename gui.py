@@ -1,3 +1,4 @@
+import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 class Gui:
@@ -16,4 +17,16 @@ class Gui:
 
         # header bg
         self.draw.rectangle([0, 0, self.display.WIDTH, self.HEAD_HEIGHT], fill=self.HEAD_COLOR, outline=self.HEAD_OUTLINE)
-        self.img.show()
+
+    def get():
+        img = np.array(self.img.convert('RGB'))
+        pb = np.rot90(img, self.display.ROTATION // 90).astype("uint16")
+
+        red = (pb[:, [0]] & 0xF8) << 8
+        green = (pb[:, [1]] & 0xFC) << 3
+        blue = (pb[:, [2]] & 0xF8) >> 3
+
+        res = red | green | blue 
+
+        return res.byteswap().tobytes()
+

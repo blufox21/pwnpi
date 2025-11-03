@@ -6,6 +6,8 @@ def main():
     try:
         display = ST7789(w=170, h=320, x_off=35)
         gui = Gui(display)
+
+        display.display(gui.get())
     except KeyboardInterrupt:
         print('\n')
     except Exception as err:
