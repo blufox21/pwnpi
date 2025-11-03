@@ -8,6 +8,7 @@ def main():
         gui = Gui(display)
 
         display.display(gui.get())
+        a = input()
     except KeyboardInterrupt:
         print('\n')
     except Exception as err:
