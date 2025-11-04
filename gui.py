@@ -22,11 +22,15 @@ class Gui:
         img = np.array(self.img.convert('RGB'))
         pb = np.rot90(img, self.display.ROTATION // 90).astype("uint16")
 
-        red = (pb[:, [0]] & 0xF8) << 8
-        green = (pb[:, [1]] & 0xFC) << 3
-        blue = (pb[:, [2]] & 0xF8) >> 3
+        red = (pb[..., [0]] & 0xF8) << 8
+        green = (pb[..., [1]] & 0xFC) << 3
+        blue = (pb[..., [2]] & 0xF8) >> 3
 
-        res = red | green | blue 
+        res = (red | green | blue).flatten()
+        res1 = []
+        for i in res:
+            res1.append(int(i&0xFF))
+            res1.append(int((i >> 8)& 0xFF))
 
-        return res.byteswap().tobytes()
+        return res1
 
